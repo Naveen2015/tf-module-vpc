@@ -27,15 +27,14 @@ resource "aws_eip" "ngw" {
   vpc   = true
   tags = merge(var.tags, {Name="${var.env}-ngw"})
 }
-/*resource "aws_nat_gateway" "example" {
-  allocation_id = aws_eip.example.id
-  subnet_id     = aws_subnet.example.id
+resource "aws_nat_gateway" "ngw" {
+  count= length(var.subnets["public"].cidr_block)
 
-  tags = {
-    Name = "gw NAT"
-  }
+  allocation_id = aws_eip.ngw[count.index].id
+  subnet_id     = module.subnets["public"].subnet_ids[count.index]
+  tags = merge(var.tags, {Name="${var.env}-ngw"})
 
   # To ensure proper ordering, it is recommended to add an explicit dependency
   # on the Internet Gateway for the VPC.
-  depends_on = [aws_internet_gateway.example]
-}*/
+  depends_on = [aws_internet_gateway.igw]
+}
