@@ -38,3 +38,4 @@ resource "aws_nat_gateway" "ngw" {
   # on the Internet Gateway for the VPC.
   depends_on = [aws_internet_gateway.igw]
 }
+
