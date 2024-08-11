@@ -52,7 +52,7 @@ resource "aws_route" "igw" {
   destination_cidr_block = "0.0.0.0/0"
 }*/
 
-output "naveen:::" {
+output "naveen__" {
   value = aws_nat_gateway.ngw
 }
 
