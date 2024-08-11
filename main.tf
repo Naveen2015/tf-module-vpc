@@ -39,3 +39,9 @@ resource "aws_nat_gateway" "ngw" {
   depends_on = [aws_internet_gateway.igw]
 }
 
+resource "aws_route" "igw" {
+  count = length(module.subnets["public"].route_table_ids)
+  route_table_id = module.subnets["public"].route_table_ids[count.index]
+  gateway_id = aws_internet_gateway.igw.id
+}
+
