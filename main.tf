@@ -53,6 +53,6 @@ resource "aws_route" "igw" {
 }*/
 
 output "naveen__" {
-  value = aws_nat_gateway.ngw
+  value = aws_nat_gateway.ngw.id
 }
 
