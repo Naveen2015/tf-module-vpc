@@ -10,6 +10,7 @@ module "subnets" {
   source = "./subnets"
   for_each = var.subnets
   cidr_block = each.value["cidr_block"]
+  azs = each.value["azs"]
   env = var.env
   name = each.value["name"]
   tags = var.tags
