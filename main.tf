@@ -23,3 +23,18 @@ resource "aws_internet_gateway" "gw" {
   tags = merge(var.tags,{"Name"="${var.env}-igw"})
 
 }
+
+resource "aws_eip" "eip" {
+  count = (var.subnets["public"].cidr_block)
+  vpc = true
+  tags = merge(var.tags,{"Name"="${var.env}-eip-${count.index+1}}"})
+}
+
+/*resource "aws_nat_gateway" "example" {
+  allocation_id = aws_eip.example.id
+  subnet_id     = aws_subnet.example.id
+
+  tags = {
+    Name = "gw NAT"
+  }
+}*/
