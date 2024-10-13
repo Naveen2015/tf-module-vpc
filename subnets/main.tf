@@ -7,3 +7,11 @@ resource "aws_subnet" "main" {
 
   tags = merge(var.tags,{"Name"="${var.env}-${var.name}-subnet-${count.index+1}"})
   }
+
+
+resource "aws_route_table" "example" {
+  vpc_id = var.vpc_id
+  count= length(var.cidr_block)
+
+  tags = merge(var.tags,{"Name"="${var.env}-${var.name}-rt-${count.index+1}"})
+}
