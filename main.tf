@@ -42,3 +42,11 @@ resource "aws_nat_gateway" "example" {
 output "naveen" {
   value = module.subnets
 }
+
+
+resource "aws_route" "r" {
+  count= length(module.subnets["public"].route_table_ids)
+  route_table_id            = module.subnets["public"].route_table_ids[count.index]
+  destination_cidr_block    = "0.0.0.0/0"
+  gateway_id = aws_internet_gateway.gw.id
+}
