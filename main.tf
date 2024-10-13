@@ -39,6 +39,6 @@ resource "aws_eip" "eip" {
 }*/
 
 
-output "kruthika" {
+output "naveen" {
   value = module.subnets
 }
