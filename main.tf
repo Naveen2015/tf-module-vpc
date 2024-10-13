@@ -44,9 +44,16 @@ output "naveen" {
 }
 
 
-resource "aws_route" "r" {
+resource "aws_route" "igw" {
   count= length(module.subnets["public"].route_table_ids)
   route_table_id            = module.subnets["public"].route_table_ids[count.index]
   destination_cidr_block    = "0.0.0.0/0"
   gateway_id = aws_internet_gateway.gw.id
+}
+
+resource "aws_route" "ngw" {
+  count= length(local.all_private_route_ids)
+  route_table_id            = local.all_private_route_ids[count.index]
+  destination_cidr_block    = "0.0.0.0/0"
+  nat_gateway_id = element(aws_nat_gateway.example.*.id,count.index )
 }
