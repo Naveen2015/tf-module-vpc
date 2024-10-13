@@ -39,9 +39,7 @@ resource "aws_nat_gateway" "ngw" {
 }
 
 
-output "naveen" {
-  value = module.subnets
-}
+
 
 
 resource "aws_route" "igw" {
