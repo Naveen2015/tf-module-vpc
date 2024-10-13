@@ -56,3 +56,10 @@ resource "aws_route" "ngw" {
   nat_gateway_id = element(aws_nat_gateway.ngw.*.id,count.index )
   destination_cidr_block    = "0.0.0.0/0"
 }
+
+resource "aws_vpc_peering_connection" "foo" {
+  peer_vpc_id   = var.default_vpc_id
+  vpc_id        = aws_vpc.main.id
+  auto_accept = true
+
+}
