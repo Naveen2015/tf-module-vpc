@@ -26,7 +26,7 @@ resource "aws_internet_gateway" "gw" {
 
 resource "aws_eip" "eip" {
   count = length(var.subnets["public"].cidr_block)
-  vpc = true
+  domain = "vpc"
   tags = merge(var.tags,{"Name"="${var.env}-eip-${count.index+1}"})
 }
 
